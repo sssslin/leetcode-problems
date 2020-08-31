@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class TwoSum {
 
     public static void main(String[] args) {
-        int[] nums = {2,7,11,15};
+        int[] nums = {2, 7, 11, 15};
         int target = 9;
 
         long startTime = System.nanoTime();
@@ -22,19 +22,14 @@ public class TwoSum {
         long startTime3 = System.nanoTime();
         int[] resultArray3 = twoSum3(nums, target);
         System.out.println(System.nanoTime() - startTime3);
-
-//        for (int i = 0; i < resultArray.length; i++) {
-//            System.out.println(resultArray[i]);
-//        }
-
-
+        System.out.println();
     }
 
     // 个人第一次的写法,用的是最简单的遍历,两层的for循环,时间复杂度为O(n^2)
     public static int[] twoSum(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
-                if (nums[j] == (target - nums[i]) ) {
+                if (nums[j] == (target - nums[i])) {
                     int twoSumArray[] = {j, i};
                     return twoSumArray;
                 }
