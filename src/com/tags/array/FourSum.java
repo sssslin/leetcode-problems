@@ -35,6 +35,9 @@ public class FourSum {
                         // 提交的时候，把这里写成continue了，得注意
                         while (left < right && nums[left] == nums[left + 1]) left++;// 去重，left逐渐变大，所以要加1
                         while (left < right && nums[right] == nums[right - 1]) right--;// 去重，right逐渐变小，所以要减1
+                        // 找到满足条件的数字,然后还需要继续寻找其他和为target可能的方案，所以需要继续向中间寻找
+                        // 单独移动指针是肯定不可能符合要求的
+                        // 比如 [1,2,3,4],1和4之和等于target,单独移动指针肯定是过大或者过小，所以要一起移动指针
                         left++;
                         right--;
                     }
