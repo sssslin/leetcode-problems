@@ -6,7 +6,7 @@ import test.TreeNode;
 public class Solution extends BaseSolution {
 
     public  int maxDepth(TreeNode root) {
-        return 1+ getHeight(root);
+        return 1 + getHeight(root);
     }
 
     private int getHeight(TreeNode node){

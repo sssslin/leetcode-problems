@@ -1,8 +1,9 @@
 package com.tags.tree.BuildTree1;
 
+import test.BaseSolution;
 import test.TreeNode;
 
-public class Solution {
+public class Solution extends BaseSolution {
 
     public static TreeNode buildTree(int[] preorder, int[] inorder) {
         if (preorder == null || inorder == null
@@ -13,6 +14,7 @@ public class Solution {
 
     private static TreeNode builderTreeHelper(int[] preorder, int[] inorder, int preStart, int inStart, int inEnd) {
 
+        // 终止条件
         if (preStart > preorder.length || inStart > inEnd) return null;
 
         TreeNode current = new TreeNode(preorder[preStart]);

@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        runSolution("maxDepth");
+        runSolution("pathSum");
     }
 
     private static void runSolution(String solutionName) {
