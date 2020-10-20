@@ -6,12 +6,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        runSolution("pathSum");
+        runSolution("addTwoNumbers");
     }
 
     private static void runSolution(String solutionName) {
         System.out.println("running " + solutionName);
-        String className = "com.tags.tree" + "." + solutionName + ".Solution";
+        String className = "com.tags.list" + "." + solutionName + ".Solution";
         try {
             Class<?> clazz = Class.forName(className);
             BaseSolution solution = (BaseSolution) clazz.newInstance();
