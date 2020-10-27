@@ -17,9 +17,34 @@ import test.ListNode;
 //输出: 2->3
 // Related Topics 链表
 // 👍 384 👎 0
+
+/**
+ * 题意分析：给定了一个排序链表，如果一个数字出现了两次或两次以上，那么需要将这个数字从链表中删除
+ * 1、从示例2可以分析出，这个题目需要dummy节点，否则直接删掉会出现空指针问题
+ * 2、另外一个问题就是，如何保证重复出现的数字被删干净，删完之后的链表该如何重新衔接起来
+ */
+// https://www.youtube.com/watch?v=w16pq8_DVno&ab_channel=JacobHuang
 public class Solution extends BaseSolution {
+
     public ListNode deleteDuplicates(ListNode head) {
 
-        return head;
+        if (head == null || head.next == null) return head;
+        ListNode newHead = new ListNode(0);
+        newHead.next = head;
+        ListNode c = newHead, p = c.next;
+
+        while (c.next != null && c.next.next != null) {
+            if (c.next.val == c.next.next.val) {
+                p = p.next;   // 标记要跳过的节点
+                while (p.next != null && p.val == p.next.val) {
+                    p = p.next;  // 继续循环标记要删除的节点
+                }
+                c.next = p.next;
+            } else {
+                c = c.next;
+                p = p.next;
+            }
+        }
+        return newHead.next;
     }
 }
