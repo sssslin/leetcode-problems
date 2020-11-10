@@ -25,26 +25,29 @@ import test.ListNode;
  */
 // https://www.youtube.com/watch?v=w16pq8_DVno&ab_channel=JacobHuang
 public class Solution extends BaseSolution {
-
     public ListNode deleteDuplicates(ListNode head) {
+        // 当链表的第一个节点和第二个节点相同的时候,那么这两个节点都该被删除
+        ListNode dummy = new ListNode(0);
+        // 将dummy和head连接起来
+        dummy.next = head;
 
-        if (head == null || head.next == null) return head;
-        ListNode newHead = new ListNode(0);
-        newHead.next = head;
-        ListNode c = newHead, p = c.next;
-
-        while (c.next != null && c.next.next != null) {
-            if (c.next.val == c.next.next.val) {
-                p = p.next;   // 标记要跳过的节点
-                while (p.next != null && p.val == p.next.val) {
-                    p = p.next;  // 继续循环标记要删除的节点
-                }
-                c.next = p.next;
-            } else {
-                c = c.next;
-                p = p.next;
+        // 双指针，一个指向dummy节点，一个指向cur节点
+        ListNode pre = dummy;
+        ListNode cur = head;
+        while (cur != null) {
+            // 当相邻两个节点重复的时候，应该要移动cur节点
+            while (cur.next != null && cur.val == cur.next.val) {
+                cur = cur.next;
             }
+
+            cur = cur.next;
+            if (pre.next.next == cur)
+                // pre指针向后移动一个位置
+                pre = pre.next;
+            else
+                // 说明指针中间有重复值，pre.next直接指向current
+                pre.next = cur;
         }
-        return newHead.next;
+        return dummy.next;
     }
 }

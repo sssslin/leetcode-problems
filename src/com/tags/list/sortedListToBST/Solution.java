@@ -21,13 +21,13 @@ import java.util.ArrayList;
 
 /**
  * 思路分析：给定一个有序链表，转换成一个高度平衡的BST
- *
+ * <p>
  * 那么首先要分析一下BST的性质
  * leftTree < root < rightTree
  * 并且要求高度差的绝对值不超过1
- *
+ * <p>
  * 根据数据范围可以反推，用二分法去做是完全没问题的
- *  以下这种解法的关键在于 二分 + 递归，并且用一个数组辅助，采用了空间换时间的做法
+ * 以下这种解法的关键在于 二分 + 递归，并且用一个数组辅助，采用了空间换时间的做法
  * https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--24/
  * time: O(log(n)) space:O(n)
  */
@@ -39,21 +39,25 @@ public class Solution extends BaseSolution {
             nums.add(head.val);
             head = head.next;
         }
+
         return sortedArrayToBST(nums);
     }
 
-    public TreeNode sortedArrayToBST(ArrayList<Integer> nums) {
+    private TreeNode sortedArrayToBST(ArrayList<Integer> nums) {
         return sortedArrayToBST(nums, 0, nums.size());
     }
 
     private TreeNode sortedArrayToBST(ArrayList<Integer> nums, int start, int end) {
-        if (start == end) {
-            return null;
-        }
+        if (start == end) return null;
+
         int mid = (start + end) >>> 1;
         TreeNode root = new TreeNode(nums.get(mid));
+        // 改变范围，进行递归
         root.left = sortedArrayToBST(nums, start, mid);
         root.right = sortedArrayToBST(nums, mid + 1, end);
+
         return root;
     }
+
+
 }
