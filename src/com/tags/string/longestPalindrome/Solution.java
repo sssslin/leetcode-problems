@@ -56,8 +56,9 @@ class Solution {
         return s.substring(i + 1, j);
     }
 
-    // 动态规划
-    public String longestPalindrome2(String s) {
+    // 动态规划：该题目的状态转移方程为：dp[i][j] = (s[i] == s[j]) and dp[i + 1][j - 1]
+    // 这个题目是可以按照填表法来做的
+    public static String longestPalindrome2(String s) {
         // 特判
         int len = s.length();
         // 字符串长度小于2，则说明只有一个字符，或者没有字符，直接返回结果即可
@@ -72,22 +73,22 @@ class Solution {
         boolean[][] dp = new boolean[len][len];
         char[] charArray = s.toCharArray();
 
-        // 初始化
+        // 初始化：相当于填表法里，对接线所有的单个字符都设置为true，
         for (int i = 0; i < len; i++) {
             dp[i][i] = true;
         }
 
+
         // i 表示 l ,j 表示 r
         for (int j = 1; j < len; j++) {
             for (int i = 0; i < j; i++) {
-                if (charArray[i] != charArray[j]) {
+                  if (charArray[i] != charArray[j]) {
                     // 字符不相等，说明不是回文串
                     dp[i][j] = false;
                 } else {
                     // 字符长度小于3，直接得出
-                    // 这判断条件不是凭空得出的，是根据边界条件[i+1, j-1]长度小于2，即说明i和j立马要重合了
                     // (j -1) - (i + 1) + 1 < 2,简化之后得出
-                    if (j - i < 3) {
+                    if (j - i < 3) {// 说明该字符串的长度不是2就是3，直接就能说明是回文串
                         dp[i][j] = true;
                     } else {
                         // 进入这里，说明，最外层是回文串，那么继续往里面判断
@@ -105,7 +106,14 @@ class Solution {
 
             }
         }
+        // 左闭右开
         return s.substring(begin, begin + maxLen);
+    }
+
+    public static void main(String[] args) {
+        String s = "babad";
+        String result = longestPalindrome2(s);
+        System.out.println(result);
     }
 
 }
