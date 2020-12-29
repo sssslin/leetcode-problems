@@ -67,8 +67,8 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        int[] nums = {4, 5, 6, 7, 0, 1, 2};
-        int index = search1(nums, 3);
+        int[] nums = {4,5,6,7,8,1,2,3};
+        int index = search1(nums, 8);
         System.out.println(index);
     }
 
@@ -77,9 +77,9 @@ class Solution {
         // corner case
         if (nums == null || nums.length == 0) return -1;
         int left = 0, right = nums.length - 1;
-        // 这种写法是left < right的
-        // https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/er-fen-fa-python-dai-ma-java-dai-ma-by-liweiwei141/
-        while (left < right) {// 边界：为什么这里需要是left <= right
+        // 这种写法是最基础的最原始的二分查找的思路和写法，不断缩小target可能存在的区间，直至最终区间内只有一个值
+        // 这种思想是：在区间内找答案
+        while (left <= right) {// 边界：为什么这里需要是left <= right
             int mid = (left + right) / 2;
             if (nums[mid] == target) {
                 return mid;
@@ -99,5 +99,31 @@ class Solution {
             }
         }
         return -1;
+    }
+    public static boolean search2(int[] nums, int target) {
+        if (nums == null && nums.length == 0) return false;
+
+        int left = 0, right = nums.length - 1;
+
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (nums[mid] < nums[right]) {// 右侧区间有序，旋转点在左区间
+                if (nums[mid] <= target && target <= nums[right]) {
+                    // mid归到右边界，所以要向上取整
+                    left = mid;
+                } else {
+                    right = mid -1;
+                }
+            } else {
+                if (nums[left] <= target && target <= nums[mid]) {
+                    right = mid -1;
+                } else {
+                    left = mid;
+                }
+            }
+        }
+
+        // 需要进行后置处理，判断目标值是否存在于数组中
+        return target == nums[left] ;
     }
 }
