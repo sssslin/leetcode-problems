@@ -1,4 +1,4 @@
-package com.template.sort;
+package com.tags.algorithm.sort;
 
 public class QuickSort {
     public static void main(String[] args) {

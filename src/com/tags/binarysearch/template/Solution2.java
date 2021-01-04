@@ -1,6 +1,6 @@
 package com.tags.binarysearch.template;
 
-import static com.template.binarySearch.integer.Template.check;
+import static com.tags.algorithm.binarySearch.integer.Template.check;
 
 public class Solution2 {
 

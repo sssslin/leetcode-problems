@@ -1,4 +1,4 @@
-package com.tags.string.algorithm.prefixSum;
+package com.tags.algorithm.prefixSum;
 
 public class Template {
     public static void main(String[] args) {

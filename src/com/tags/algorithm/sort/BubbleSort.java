@@ -1,4 +1,4 @@
-package com.template.sort;
+package com.tags.algorithm.sort;
 
 // https://www.acwing.com/file_system/file/content/whole/index/content/1166906/
 /**每次相邻两个数字进行比较，将大的数字交换到后一个，然后继续操作，一直把本趟最大数字放在最后，

@@ -1,4 +1,4 @@
-package com.template.sort;
+package com.tags.algorithm.sort;
 
 /**
  * 首先通过n-1次比较，从n个数字中找到最小的数，将它和第一个数字交换—第一趟选则排序，结果最小的被安置在第一个位置。

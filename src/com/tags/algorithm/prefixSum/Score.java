@@ -1,4 +1,4 @@
-package com.tags.string.algorithm.prefixSum;
+package com.tags.algorithm.prefixSum;
 
 import java.util.Arrays;
 

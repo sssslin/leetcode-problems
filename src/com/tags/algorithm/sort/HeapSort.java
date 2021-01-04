@@ -1,4 +1,4 @@
-package com.template.sort;
+package com.tags.algorithm.sort;
 
 public class HeapSort {
     int [] pq;      // 完全二叉树，存放数值

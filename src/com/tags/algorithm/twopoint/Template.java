@@ -1,4 +1,4 @@
-package com.template.twopoint;
+package com.tags.algorithm.twopoint;
 
 public class Template {
     public static void main(String[] args) {

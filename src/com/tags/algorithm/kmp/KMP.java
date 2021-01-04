@@ -1,4 +1,4 @@
-package com.tags.string.algorithm.kmp;
+package com.tags.algorithm.kmp;
 
 /**
  * kmp模板，需要反复练习

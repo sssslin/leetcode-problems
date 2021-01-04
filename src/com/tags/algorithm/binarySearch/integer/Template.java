@@ -1,4 +1,4 @@
-package com.template.binarySearch.integer;
+package com.tags.algorithm.binarySearch.integer;
 
 
 /**
