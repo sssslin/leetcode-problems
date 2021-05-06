@@ -11,6 +11,8 @@ import java.util.Arrays;
    (k,len - 1]:包含所有c
    在j指针的移动过程中，交换元素的位置，使元素一直保持以上这个分割区间，
    直到j与k相遇，则表明所有元素，排序完毕
+
+   2021.05.04:优化变量命名
  */
 public class Solution {
 
@@ -22,26 +24,25 @@ public class Solution {
         }
 
         // init
-        int i = 0, j = 0, k = nums.length - 1;
+        int left = 0;
+        int right = nums.length - 1;
+        int current = 0;
 
-        while(j <= k) {
-            if(nums[j] == 0) {
-                swap(nums, i++, j++);
-            }
-            else if(nums[j] == 0) {
-                j++;
-            }
-            else{
-                // nums[j] = 2
-                swap(nums, j, k--);
+        while(current <= right) {
+            if(nums[current] == 0) {
+                swap(nums, left++, current++);
+            } else if(nums[current] == 1) {
+                current++;
+            } else {
+                swap(nums, current, right--);
             }
         }
     }
 
-    public static void swap(int[] nums, int i,int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+    private static void swap(int[] nums, int left, int current) {
+        int temp = nums[left];
+        nums[left] = nums[current];
+        nums[current] = temp;
     }
 
     public static void main(String[] args) {
