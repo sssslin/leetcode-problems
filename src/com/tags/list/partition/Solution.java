@@ -46,7 +46,6 @@ public class Solution extends BaseSolution {
         }
 
         //important! avoid cycle in linked list. otherwise u will get TLE.
-        //
         curr2.next = null;
         // 将小于x的链表的最后一个节点连接到大于x的链表的第一个节点
         curr1.next = dummy2.next;
