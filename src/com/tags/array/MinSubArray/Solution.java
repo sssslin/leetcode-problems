@@ -2,6 +2,8 @@ package com.tags.array.MinSubArray;
 
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
 
@@ -11,6 +13,20 @@ public class Solution {
 
         int len = minSubArrayLen(target, nums);
         System.out.println(len);
+
+        Map<String, String> goodsSKUMap = new HashMap<>();
+
+
+        goodsSKUMap.put("2222","1111");
+        goodsSKUMap.put("3333","1111");
+        goodsSKUMap.put("4444","1111");
+        goodsSKUMap.put("5555","1111");
+
+
+        String s = goodsSKUMap.get("222");
+        String s1 = goodsSKUMap.get("3333");
+        System.out.println(s);
+        System.out.println(s1);
     }
 
     /**
@@ -29,17 +45,17 @@ public class Solution {
     public static int minSubArrayLen(int target, int[] nums) {
         // corner case
         int length = nums.length;
-        if(length == 0) return 0;
+        if (length == 0) return 0;
 
         // 初始化左右端点
         int left = 0, right = 0;
 
         int result = Integer.MAX_VALUE;
         int sum = 0;
-        while(right < length) {
+        while (right < length) {
             // 右端点一直向右移动，代表寻找可行解：外层循环寻找可行解
             sum += nums[right];
-            while(sum >= target) {
+            while (sum >= target) {
                 // 内层循环寻找最优解
                 result = Math.min(result, right - left + 1);
                 sum -= nums[left];
