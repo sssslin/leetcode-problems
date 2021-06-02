@@ -41,7 +41,6 @@ public class MinimumWindowSubstring {
             wordDict.put(ch, count - 1);
 
             // count - 1并不影响当前的值
-            // match another character
             if (count == 1) {
                 // 1 -> 0
                 matchCount++;
@@ -68,6 +67,7 @@ public class MinimumWindowSubstring {
                 }
             }
         }
+        System.out.println(s.substring(index, index + minLen));
         return minLen == Integer.MAX_VALUE ? "" : s.substring(index, index + minLen);
     }
 
@@ -92,8 +92,8 @@ public class MinimumWindowSubstring {
     }
 
     public static void main(String[] args) {
-        String s = "aa";
-        String t = "aa";
+        String s = "ADOBECODEBANC";
+        String t = "ABC";
 
         String result = minWindow(s, t);
         System.out.println(result);
