@@ -1,6 +1,5 @@
 package com.tags.array.findAnagrams;
 
-import sun.text.normalizer.UBiDiProps;
 
 import java.util.*;
 
