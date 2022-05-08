@@ -1,5 +1,6 @@
 package com.tags.array.TwoSum;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -8,11 +9,12 @@ import java.util.HashMap;
 public class Solution {
 
     public static void main(String[] args) {
-        int[] nums = {2, 7, 11, 15};
-        int target = 9;
+        int[] nums = {3, 2, 4};
+        int target = 6;
 
         long startTime = System.nanoTime();
         int[] resultArray = twoSum(nums, target);
+        System.out.println(Arrays.toString(resultArray));
         System.out.println(System.nanoTime() - startTime);
 
         long startTime2 = System.nanoTime();
@@ -28,10 +30,10 @@ public class Solution {
     // 个人第一次的写法,用的是最简单的遍历,两层的for循环,时间复杂度为O(n^2)
     public static int[] twoSum(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[j] == (target - nums[i])) {
-                    int twoSumArray[] = {j, i};
-                    return twoSumArray;
+            for (int j = nums.length - 1; j >= 0; j--) {
+                if (target == nums[i] + nums[j]) {
+                    int[] result = {i, j};
+                    return result;
                 }
             }
         }
@@ -70,5 +72,22 @@ public class Solution {
             m.put(nums[i], i);
         }
         return res;
+    }
+
+    public static int[] twoSum4(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+
+        // key 数组的值  value 数组的索引
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+           if (map.containsKey(target - nums[i])) {
+               return new int[] {map.get(target - nums[i]), i};
+           }
+            map.put(nums[i], i);
+        }
+        return null;
     }
 }

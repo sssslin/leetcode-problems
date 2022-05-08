@@ -5,38 +5,52 @@ package com.tags.array.MaxArea;
  */
 public class Solution {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    int[] test = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-    int max = maxArea(test);
-    System.out.println(max);
-  }
+        int[] test = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+        int max = maxArea(test);
+        System.out.println(max);
+    }
 
 
-  public static int maxArea(int[] height) {
-
-    int max = 0;
-    for (int i = 0; i < height.length; i++) {
-      for (int j = 1; j + i < height.length; j++) {
-        int h = height[i] < height[i + j] ? height[i] : height[i + j];
-        int range = j;
-        int sqr = h * range;
-        if (sqr > max) {
-          max = sqr;
+    /***
+     * @param height
+     * @return int
+     * @date 2022/4/10 4:38 PM
+     * @author linjunfeng
+     * 双指针算法，左右指针相向而行
+     */
+    public static int maxArea(int[] height) {
+        if (height == null) {
+            return 0;
         }
-      }
-    }
-    return max;
-  }
 
-  public static int maxArea2(int[] height) {
-    int res = 0, i = 0, j = height.length - 1;
-    while (i < j) {
-      res = Math.max(res, Math.min(height[i], height[j]) * (j - i));
-      // 为什么要比较两边的高度?
-      if (height[i] < height[j]) ++i;
-      else --j;
+        int maxArea = Integer.MIN_VALUE;
+        int left = 0;
+        int right = height.length - 1;
+
+        while (left < right) {
+
+            int length = right - left;
+            int high = height[left] < height[right] ? height[left] : height[right];
+
+            // 判断左右指针的高度，只移动当前指针所在点位高度较小的那个
+            if (height[right] > height[left]) {
+                maxArea = maxArea > length * high ? maxArea : length * high;
+                left++;
+            } else {
+                maxArea = maxArea > length * high ? maxArea : length * high;
+                right--;
+            }
+
+            System.out.print(length);
+            System.out.print("     ");
+            System.out.print(high);
+            System.out.print("     ");
+            System.out.println(maxArea);
+
+        }
+
+        return maxArea;
     }
-    return res;
-  }
 }

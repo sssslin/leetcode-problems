@@ -7,7 +7,7 @@ public class Solution {
     public static void main(String[] args) {
 
         int nums[] = {-1, 2, 1, -4};
-        int result = threeSumClosest(nums, 1);
+        int result = threeSumClosest1(nums, 1);
         System.out.println(result);
     }
 
@@ -32,6 +32,29 @@ public class Solution {
 
             }
         }
+        return result;
+    }
+
+    public static int threeSumClosest1(int[] nums, int target) {
+
+        Arrays.sort(nums);
+
+        int result = nums[0] + nums[1] + nums[2];
+        for (int i = 0; i < nums.length; i++) {
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (Math.abs(target - result) > Math.abs(target - sum)) result = sum;
+                if (sum > target) right--;
+                if (sum < target) left++;
+                if (sum == target) return sum;
+            }
+        }
+
         return result;
     }
 }
