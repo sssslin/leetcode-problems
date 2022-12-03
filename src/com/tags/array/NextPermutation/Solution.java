@@ -1,5 +1,7 @@
 package com.tags.array.NextPermutation;
 
+import java.util.Arrays;
+
 /**
  * 题意理解：Permutation
  *
@@ -17,43 +19,40 @@ public class Solution {
 
     public static void main(String[] args) {
 
+        int[] nums = {1, 5, 7, 9, 8, 2, 1};
+        nextPermutation(nums);
     }
 
     // 复杂度---time:O(n), space:O(1)
     public static void nextPermutation(int[] nums) {
-        if (nums == null || nums.length == 0) return;
 
-        int n = nums.length;
-        int i = n - 2;
-        // 从后往前找，后半段如果是升序的，继续往前，如果出现升序的情况，则开始进行数据交换
-        while (i >= 0 && nums[i] >= nums[i + 1]) {
-            i--;
-        }
+      if (nums == null || nums.length == 0) return;
 
-        // 如果进入这个if语句，则说明肯定存在下一个全排序
-        if (i >= 0) {
-            int j = n - 1;
-            while (j > i && nums[j] <= nums[i]) {
-                j--;
-            }
-            swap(nums, i, j);
-        }
+      int fast = nums.length - 2;
+      while (fast >= 0 && nums[fast + 1] <= nums[fast]) {
+          fast--;
+      }
 
-        // 完全降序排列也是适用的
-        reverse(nums, i + 1, n - 1);
+      if (fast >= 0) {
+          int slow = nums.length - 1;
+          while (slow >= 0 && nums[slow] <= nums[fast]) {
+              slow--;
+          }
+          swap(nums, slow, fast);
+      }
+      reverse(nums, fast + 1, nums.length - 1);
     }
 
-    // 交换
-    public static void swap(int[] nums, int  lo, int hi) {
-        int temp = nums[lo];
-        nums[lo] = nums[hi];
-        nums[hi] = temp;
-    }
-
-    // 反转
-    private static void reverse(int[] nums, int lo, int hi) {
-        while (lo < hi) {
-            swap(nums, lo++, hi--);
+    private static void reverse(int[] nums, int left, int right) {
+        while (left < right) {
+            swap(nums, left++, right--);
         }
     }
+
+    private static void swap(int[] nums, int slow, int fast) {
+        int temp = nums[slow];
+        nums[slow] = nums[fast];
+        nums[fast] = nums[slow];
+    }
+
 }

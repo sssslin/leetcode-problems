@@ -1,52 +1,51 @@
 package com.tags.array.sortColors;
 
 import java.util.Arrays;
+
 /*
    时间复杂度 : O(n) 空间复杂度: O(1)
-   在这道题目中，j代表的是当前的指针，
-   i，j,k三个变量的意义在于，将数组分割成4个区域
-   [0,i)：包含所有a
-   [i,j): 包含所有b
-   [j,k]：未排序元素
-   (k,len - 1]:包含所有c
-   在j指针的移动过程中，交换元素的位置，使元素一直保持以上这个分割区间，
-   直到j与k相遇，则表明所有元素，排序完毕
-
-   2021.05.04:优化变量命名
  */
 public class Solution {
 
-    // https://www.youtube.com/watch?v=yTwW8WiGrKw
+    /**
+     * 解题思路
+     * 原题为荷兰国旗问题，根据《算法导论》中提到的  循环不变量 性质分割对应的区间
+     * [0, P0) == 0
+     * [P0, i) == 1
+     * [P1, len - 1] == 2
+     *
+     * @param nums
+     */
     public static void sortColors(int[] nums) {
         // corner case
-        if(nums == null || nums.length <= 1) {
+        if (nums == null || nums.length <= 1) {
             return;
         }
 
-        // init
-        int left = 0;
-        int right = nums.length - 1;
-        int current = 0;
-
-        while(current <= right) {
-            if(nums[current] == 0) {
-                swap(nums, left++, current++);
-            } else if(nums[current] == 1) {
-                current++;
+        int p0 = 0;
+        int i = 0;
+        int p2 = nums.length - 1;
+        while (i <= p2) {
+            if (nums[i] == 0) {
+                // p0++，保证[0. p0)之间的值都是为0
+                swap(nums, i++, p0++);
+            } else if (nums[i] == 1) {
+                i++;
             } else {
-                swap(nums, current, right--);
+                // p2--，保证数组的末尾都是为2
+                swap(nums, i, p2--);
             }
         }
     }
 
-    private static void swap(int[] nums, int left, int current) {
+    private static void swap(int[] nums, int left, int right) {
         int temp = nums[left];
-        nums[left] = nums[current];
-        nums[current] = temp;
+        nums[left] = nums[right];
+        nums[right] = temp;
     }
 
     public static void main(String[] args) {
-        int[] nums = {2,0,2,1,1,0};
+        int[] nums = {2, 0, 2, 1, 1, 0};
         sortColors(nums);
         System.out.println(Arrays.toString(nums));
     }

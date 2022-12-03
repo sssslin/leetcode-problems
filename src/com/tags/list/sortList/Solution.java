@@ -32,34 +32,72 @@ import test.ListNode;
  *  * space complexity : O(logn)
  */
 public class Solution extends BaseSolution {
-    public ListNode sortList(ListNode head) {
-        if(head == null || head.next == null) return head;
 
-        ListNode dummy = new ListNode(-1);
+    /**
+     * 1、使用快慢指针，将两个链表给分成两部分
+     * 2、分别对两个链表进行排序
+     * 3、合并链表
+     * @param head
+     * @return
+     */
+    public  ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode dummy = new ListNode(0);
         dummy.next = head;
+        ListNode fast = dummy;
+        ListNode slow = dummy;
 
-        ListNode cur = head;
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
 
-        ListNode pre = null;
-        ListNode temp = null;
-        while (cur != null && cur.next != null) {
-            if (cur.val <= cur.next.val) {
-                cur = cur.next;
-            }else {
-                temp = cur.next;
-                cur.next = cur.next.next;
-                pre = dummy;
-                while (pre.next.val <= temp.val) {
-                    pre = pre.next;
-                }
-                // temp节点指向新的节点
-                temp.next = pre.next;
-                // temp节点的头部连上
-                pre.next = temp;
+        ListNode head2 = slow.next;
+        slow.next = null;
+
+        head = sortList(head);
+        head2 = sortList(head2);
+        return merge(head, head2);
+    }
+
+    private ListNode merge(ListNode list1, ListNode list2) {
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                cur.next =  list1;
+                list1 = list1.next;
+            } else {
+               cur.next = list2;
+               list2 = list2.next;
             }
+            cur = cur.next;
+        }
+
+        if (list1 == null) {
+            cur.next = list2;
+        }
+
+        if (list2 == null) {
+            cur.next = list1;
         }
         return dummy.next;
     }
+
+
+    /**
+     * 从这道题，我至少可以学习以下3点
+     * 1、如何合并有序链表
+     * 2、归并排序的引用
+     * 3、递归
+     *
+     * 有以下问题需要不断练习
+     * 1、搞清楚指针的指向关系
+     * 2、搞清楚什么时候是节点、什么时候是指针
+     */
+
 }
 
 

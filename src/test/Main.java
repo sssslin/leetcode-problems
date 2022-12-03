@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        runSolution("partition");
+        runSolution("sortList");
     }
 
     private static void runSolution(String solutionName) {
