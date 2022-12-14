@@ -29,26 +29,23 @@ public class Solution {
 
     // two pointer
     public static int[] twoSumTwoPointer(int[] numbers, int target) {
-        int left = 0, right = numbers.length - 1;
 
-        // 完结条件：为什么要是left < right 而不是left <= right
-        // 题意要求: 1 <= answer[0] < answer[1] <= numbers.length
-        while (left < right) {
-            int sum = numbers[left] + numbers[right];
-            if (sum == target) {
-                return new int[]{left + 1, right + 1};
-            } else if (sum < target) {
-                ++left;
-                //left++;
-                System.out.println(left);
-            } else {
-                --right;
-                //right--;
-                System.out.println(right);
+            int left = 0;
+            int right = numbers.length - 1;
+
+            while(left < right) {
+                int sum = numbers[left] + numbers[right];
+                if (sum < target) {
+                    left++;
+                } else if (sum == target) {
+                    int[] result ={left + 1, right + 1};
+                    return result;
+                } else if (sum > target) {
+                    right--;
+                }
             }
-        }
-
-        return new int[]{-1, -1};
+            int[] result ={ -1, -1};
+            return result;
     }
 
     // acwing模板
@@ -75,8 +72,8 @@ public class Solution {
         int[] result = twoSum(nums, 0);
         int[] result1 = twoSumTwoPointer(nums, 0);
         int[] result2 = twoSumAcwing(nums, 0);
-        System.out.println(Arrays.toString(result));
+      //  System.out.println(Arrays.toString(result));
         System.out.println(Arrays.toString(result1));
-        System.out.println(Arrays.toString(result2));
+      //  System.out.println(Arrays.toString(result2));
     }
 }
